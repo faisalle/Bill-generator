@@ -1,7 +1,10 @@
 import './App.css';
 import jsPDF from 'jspdf'
 
+import  {tabfill,tabline} from './Tab'
+
 const App = () => {
+
 
     var doc = new jsPDF();
         //---numero de facture, nom du site, date, lieu---
@@ -28,9 +31,10 @@ const App = () => {
         doc.setFontSize(11)
 
         //---------PARTIE PRESTATAIRE----------
+       
 
-        doc.text(13,30,`Nom:`)
-        doc.text(13,37,`Adresse:`)
+        doc.text(13,30,`Name:`)
+        doc.text(13,37,`Address:`)
         doc.text(13,44,`Complément:`)
         doc.text(13,51,`Ville:`)
         doc.text(13,58,`SIREN:`)
@@ -38,8 +42,8 @@ const App = () => {
 
         //---------PARTIE CLIENT---------------
 
-        doc.text(118,30,`Nom:`)
-        doc.text(118,37,`Adresse:`)
+        doc.text(118,30,`Name`)
+        doc.text(118,37,`Address:`)
         doc.text(118,44,`Complément:`)
         doc.text(118,51,`Ville:`)
         doc.text(118,58,`SIREN:`)
@@ -48,16 +52,9 @@ const App = () => {
         //------ Designation de la prestation, Quantité, Prix Unitaire HT €, TOTAL HT €
         //------ Taleau Debut --------
         doc.rect(10,78,190,104)
-        //------Trait Horizontal------
         doc.line(10,92,200,92)
-        doc.line(10,102,200,102) 
-        doc.line(10,112,200,112) 
-        doc.line(10,122,200,122) 
-        doc.line(10,132,200,132) 
-        doc.line(10,142,200,142) 
-        doc.line(10,152,200,152) 
-        doc.line(10,162,200,162) 
-        doc.line(10,172,200,172) 
+        //------Trait Horizontal------
+        tabline(doc)
         //-------Trait Vertical-------
         doc.line(80, 78, 80, 182)
         doc.line(105, 78, 105, 182)
@@ -69,52 +66,7 @@ const App = () => {
         doc.text(162,86,`TOTAL HT €`)
         //----Remplissage ligne par ligne-----
         doc.setFont('times','normal')
-        //----Premiere ligne -----
-        doc.text(30,100,`Site web`)
-        doc.text(88,100,`25000`)
-        doc.text(120,100,`25000 €`)
-        doc.text(170,100,`25000 €`)
-        //----Deuxieme ligne -----
-        doc.text(30,110,`Site web`)
-        doc.text(88,110,`25000`)
-        doc.text(120,110,`25000€`)
-        doc.text(170,110,`25000€`)
-        //----Troisieme ligne -----
-        doc.text(30,120,`Site web`)
-        doc.text(88,120,`25000`)
-        doc.text(120,120,`25000€`)
-        doc.text(170,120,`25000€`)
-        //----Quatrieme ligne -----
-        doc.text(30,130,`Site web`)
-        doc.text(88,130,`25000`)
-        doc.text(120,130,`25000€`)
-        doc.text(170,130,`25000€`)
-        //----Cinquieme ligne -----
-        doc.text(30,140,`Site web`)
-        doc.text(88,140,`25000`)
-        doc.text(120,140,`25000€`)
-        doc.text(170,140,`25000€`)
-        //----Sixieme ligne -----
-        doc.text(30,150,`Site web`)
-        doc.text(88,150,`25000`)
-        doc.text(120,150,`25000€`)
-        doc.text(170,150,`25000€`)
-        //----Septieme ligne -----
-        doc.text(30,160,`Site web`)
-        doc.text(88,160,`25000`)
-        doc.text(120,160,`25000€`)
-        doc.text(170,160,`25000€`)
-        //----Huitieme ligne -----
-        doc.text(30,170,`Site web`)
-        doc.text(88,170,`25000`)
-        doc.text(120,170,`25000€`)
-        doc.text(170,170,`25000€`)
-        //----Neuvieme ligne -----
-        doc.text(30,180,`Site web`)
-        doc.text(88,180,`25000`)
-        doc.text(120,180,`25000€`)
-        doc.text(170,180,`25000€`)
-    
+        tabfill(doc)
     
         //------ Date de signature, Date de reglement, Date butoire de livraison
         //------ Tableau et Date------
@@ -147,21 +99,102 @@ const App = () => {
         doc.setFontSize(12)
         doc.text(25,250,'Signature du prestataire : ')
         doc.text(135,250,'Signature du client : ')
-
-
         //------ Bas de page------
         doc.line(0, 290, 210, 290)
-
-
         
 
-        doc.save('hello-world.PDF');
 
+        const download = () => {
+            doc.save('Facture.PDF')
+        }
 
   return (
     <div className="App">
-        HELLLLLLOWWWWWWW
-        <button>clique here</button>
+        <div className='all'>
+        <h3 className='center'>Facture Genrator</h3>
+
+        <form>
+            
+           
+            <div className='float1'>
+                <label for="Cname">Client Name</label>
+                <input type="text" id="Cname" name="firstname" placeholder="Name"/>
+            </div>            
+            <div  className='float1'>
+                <label for="lname"> Client Address:</label>
+                <input type="text" id="Cadresse" name="lastname" placeholder='Address'/>
+            </div>                
+            <div className='float1'>
+                <label for="lname">Client Complément </label>
+                <input type="text" id="Ccomplement" name="complement" placeholder='Complement'/>
+            </div>
+            <div className='float1'>
+                <label for="lname">Client City:</label>
+                <input type="text" id="Cville" name="ville" placeholder='City'/>
+            </div>            
+            <div className='float1'>
+                <label for="lname">Client SIREN:</label>
+                <input type="text" id="Csiren" name="siren" placeholder='SIREN'/>
+            </div>
+            <div className='float1'>
+                <label for="lname">Client SIRET:</label>
+                <input type="text" id="Csiret" name="siret" placeholder='Siret'/>
+            </div>
+
+            
+            <div className='float2'>
+                <label for="Cname">Prestataire Name</label>
+                <input type="text" id="Cname" name="firstname" placeholder="Name"/>
+            </div>
+
+
+            <div  className='float2'>
+                <label for="lname">Prestataire Address:</label>
+                <input type="text" id="Cadresse" name="lastname" placeholder='Address'/>
+            </div>
+
+
+            <div className='float2'>
+                <label for="lname">Prestataire Complément </label>
+                <input type="text" id="Ccomplement" name="complement" placeholder='Complement'/>
+            </div>
+
+
+            <div className='float2'>
+                <label for="lname">Prestataire City:</label>
+                <input type="text" id="Cville" name="ville" placeholder='City'/>
+            </div>
+
+
+            <div className='float2'>
+                <label for="lname">Prestataire SIREN:</label>
+                <input type="text" id="Csiren" name="siren" placeholder='SIREN'/>
+            </div>
+
+
+            <div className='float2'>
+                <label for="lname">Prestataire SIRET:</label>
+                <input type="text" id="Csiret" name="siret" placeholder='Siret'/>
+            </div>
+
+
+
+
+
+
+
+
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                <option value="australia">Australia</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+                </select>
+            
+                <input type="submit" value="Submit" onClick={download}/>
+
+        </form>
+        </div>
     </div>
   );
 }
