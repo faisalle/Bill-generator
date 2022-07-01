@@ -1,10 +1,73 @@
 import './App.css';
 import jsPDF from 'jspdf'
+import {tabfill,tabline} from './Tab'
+import  Array  from './grid'
+ 
+const Prestataire = () => {
+    return(
+        <div className='prestataire'>
+            <div>
+                <label for="Pname">Prestataire Name</label>
+                <input type="text" id="Pname" name="firstname" placeholder="Name"/>
+            </div>
+            <div>
+                <label for="Paddress">Prestataire Address:</label>
+                <input type="text" id="Padresse" name="lastname" placeholder='Address'/>
+            </div>
+            <div>
+                <label for="Pcomplement">Prestataire Complément </label>
+                <input type="text" id="Pcomplement" name="complement" placeholder='Complement'/>
+            </div>
+            <div>
+                <label for="Pcity">Prestataire City:</label>
+                <input type="text" id="Pville" name="ville" placeholder='City'/>
+            </div>
+            <div>
+                <label for="Psiren">Prestataire SIREN:</label>
+                <input type="text" id="Psiren" name="siren" placeholder='SIREN'/>
+            </div>
+            <div>
+                <label for="Psiret">Prestataire SIRET:</label>
+                <input type="text" id="Psiret" name="siret" placeholder='Siret'/>
+            </div>
+        </div>
+    )
+}
+const Client = () => {
+    return(
+        <div className='client'>
+            <div>
+                <label for="Cname">Client Name</label>
+                <input type="text" id="Cname" name="firstname" placeholder="Name"/>
+            </div>            
+            <div>
+                <label for="Caddress"> Client Address:</label>
+                <input type="text" id="Cadresse" name="lastname" placeholder='Address'/>
+            </div>                
+            <div>
+                <label for="Ccomplement">Client Complément </label>
+                <input type="text" id="Ccomplement" name="complement" placeholder='Complement'/>
+            </div>
+            <div>
+                <label for="Cville">Client City:</label>
+                <input type="text" id="Cville" name="ville" placeholder='City'/>
+            </div>            
+            <div>
+                <label for="Csiren">Client SIREN:</label>
+                <input type="text" id="Csiren" name="siren" placeholder='SIREN'/>
+            </div>
+            <div>
+                <label for="Csiret">Client SIRET:</label>
+                <input type="text" id="Csiret" name="siret" placeholder='Siret'/>
+            </div>
+        </div>
+    )
+}
 
-import  {tabfill,tabline} from './Tab'
+
 
 const App = () => {
-
+    
 
     var doc = new jsPDF();
         //---numero de facture, nom du site, date, lieu---
@@ -64,6 +127,7 @@ const App = () => {
         doc.text(82,86,`QUANTITE`)
         doc.text(108,86,`PRIX UNITAIRE HT €`)
         doc.text(162,86,`TOTAL HT €`)
+
         //----Remplissage ligne par ligne-----
         doc.setFont('times','normal')
         tabfill(doc)
@@ -103,7 +167,6 @@ const App = () => {
         doc.line(0, 290, 210, 290)
         
 
-
         const download = () => {
             doc.save('Facture.PDF')
         }
@@ -112,76 +175,14 @@ const App = () => {
     <div className="App">
         <div className='all'>
         <h3 className='center'>Facture Genrator</h3>
-
         <form>
-            
-           
-            <div className='float1'>
-                <label for="Cname">Client Name</label>
-                <input type="text" id="Cname" name="firstname" placeholder="Name"/>
-            </div>            
-            <div  className='float1'>
-                <label for="lname"> Client Address:</label>
-                <input type="text" id="Cadresse" name="lastname" placeholder='Address'/>
-            </div>                
-            <div className='float1'>
-                <label for="lname">Client Complément </label>
-                <input type="text" id="Ccomplement" name="complement" placeholder='Complement'/>
-            </div>
-            <div className='float1'>
-                <label for="lname">Client City:</label>
-                <input type="text" id="Cville" name="ville" placeholder='City'/>
-            </div>            
-            <div className='float1'>
-                <label for="lname">Client SIREN:</label>
-                <input type="text" id="Csiren" name="siren" placeholder='SIREN'/>
-            </div>
-            <div className='float1'>
-                <label for="lname">Client SIRET:</label>
-                <input type="text" id="Csiret" name="siret" placeholder='Siret'/>
-            </div>
 
-            
-            <div className='float2'>
-                <label for="Cname">Prestataire Name</label>
-                <input type="text" id="Cname" name="firstname" placeholder="Name"/>
-            </div>
-
-
-            <div  className='float2'>
-                <label for="lname">Prestataire Address:</label>
-                <input type="text" id="Cadresse" name="lastname" placeholder='Address'/>
-            </div>
-
-
-            <div className='float2'>
-                <label for="lname">Prestataire Complément </label>
-                <input type="text" id="Ccomplement" name="complement" placeholder='Complement'/>
-            </div>
-
-
-            <div className='float2'>
-                <label for="lname">Prestataire City:</label>
-                <input type="text" id="Cville" name="ville" placeholder='City'/>
-            </div>
-
-
-            <div className='float2'>
-                <label for="lname">Prestataire SIREN:</label>
-                <input type="text" id="Csiren" name="siren" placeholder='SIREN'/>
-            </div>
-
-
-            <div className='float2'>
-                <label for="lname">Prestataire SIRET:</label>
-                <input type="text" id="Csiret" name="siret" placeholder='Siret'/>
-            </div>
-
-
-
-
-
-
+            <div className='flex'>
+                <Prestataire/>
+                <Client/>
+             </div>
+                <Array/>
+             
 
 
                 <label for="country">Country</label>

@@ -9,10 +9,12 @@
     border-radius: 4px;
     box-sizing: border-box;
   }
-
+  .white{
+    background-color: #ffffffb2;
+  }
   input[type=submit] {
     width: 55%;
-    background-color: #4CAF50;
+    background-color: #575150;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -28,15 +30,11 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    width:50%;
   }
-   .float1 {
-    float: left;
-    width: 48%;
+   .prestataire {
     background-color: #83a4ff8c;  
   }
-  .float2 {
-    margin-left: 50%; 
+  .client { 
     background-color: #ff8a8a; 
   }
   div {
