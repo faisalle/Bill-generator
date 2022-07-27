@@ -1,12 +1,22 @@
-const tabfill = (doc) => {
+const tabfill = (doc,e) => {
     var i = 0 ; var Y = 100;
+    var globalTotal = 0;
     while (i < 9) {
-        doc.text(30,Y,'Site web')
-        doc.text(88,Y,`25000`)
-        doc.text(120,Y,`25000 €`)
-        doc.text(170,Y,`25000 €`)
+
+        console.log(e.target[`lineArray${i}`])
+        var quantity = parseInt(e.target.quantity[i].value)
+        var price = parseInt(e.target.price[i].value)
+        var total = quantity * price
+
+
+        doc.text(30,Y,`${e.target.name[i].value}`)
+        doc.text(90,Y,`${isNaN(quantity) ? '' : quantity }`)
+        doc.text(125,Y,`${isNaN(price) ? '' : price}`)
+        doc.text(170,Y,`${isNaN(total) ? '' : total}`)
+        globalTotal += isNaN(total) ? 0 : total
         Y=Y+10 ; i++
     }
+    return globalTotal
 }
 
 const tabline = (doc) =>{

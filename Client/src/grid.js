@@ -35,16 +35,15 @@ const loopCopy = (c) => {
 }
 
 const inputHandlerArray = (e) =>{
-  //  console.log(e.target.parentNode)
+ 
     var c = parseInt(e.target.parentNode.id.split('lineArray')[1])
     if (textPresent(e.target.parentNode)){
-        console.log(c)
+        
         if(c<8)
             document.getElementById(`lineArray${c+1}`).style.display='block'
     }
     else {
     loopCopy(c)
-    //document.getElementById(`lineArray${c+1}`).style.display='none'
     }
 } 
 
@@ -54,13 +53,14 @@ const getArray = () => {
         array.push(
             <div id={`lineArray${c}`} key={c} className={c%2 ?'white input' : 'input'}
             style={{display:c? 'none': 'block'}} onInput={(e) => inputHandlerArray(e)} >
-                <input id='name'/>
-                <br/>
-                <input id='quantity'/>
-                <br/>
-                <input id='price'/>
-                <br/>
-                <input id='totalPrice'/>
+                
+   
+                <input placeholder="nom" className="tab" id='name'/>
+
+                <input placeholder="quantité" className="tab" id='quantity'/>
+
+                <input placeholder="prix" className="tab" id='price'/>
+
             </div>
         )
     }

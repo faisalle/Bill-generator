@@ -2,63 +2,72 @@ import './App.css';
 import jsPDF from 'jspdf'
 import {tabfill,tabline} from './Tab'
 import  Array  from './grid'
+
  
 const Prestataire = () => {
     return(
         <div className='prestataire'>
             <div>
-                <label for="Pname">Prestataire Name</label>
-                <input type="text" id="Pname" name="firstname" placeholder="Name"/>
+                <label htmlFor="pName">Nom du prestataire</label>
+                <input type="text" id="pName" name="firstname" placeholder="Nom" maxLength={25} />
             </div>
             <div>
-                <label for="Paddress">Prestataire Address:</label>
-                <input type="text" id="Padresse" name="lastname" placeholder='Address'/>
+                <label htmlFor="pAddress">Adresse du prestataire:</label>
+                <input type="text" id="pAddress" name="lastname" placeholder='Adresse' maxLength={30} />
             </div>
             <div>
-                <label for="Pcomplement">Prestataire Complément </label>
-                <input type="text" id="Pcomplement" name="complement" placeholder='Complement'/>
+                <label htmlFor="pComplement">Complément d'adresse du prestataire :</label>
+                <input type="text" id="pComplement" name="complement" placeholder="Complement d'adrresse" maxLength={30} />
             </div>
             <div>
-                <label for="Pcity">Prestataire City:</label>
-                <input type="text" id="Pville" name="ville" placeholder='City'/>
+                <label htmlFor="pCity">Ville du Prestataire:</label>
+                <input type="text" id="pCity" name="ville" placeholder='Ville' maxLength={30} />
             </div>
             <div>
-                <label for="Psiren">Prestataire SIREN:</label>
-                <input type="text" id="Psiren" name="siren" placeholder='SIREN'/>
+                <label htmlFor="pPcode">Code postale du Prestataire:</label>
+                <input type="text" id="pPcode" name="ville" placeholder='Code postale' maxLength={10}/>
             </div>
             <div>
-                <label for="Psiret">Prestataire SIRET:</label>
-                <input type="text" id="Psiret" name="siret" placeholder='Siret'/>
+                <label htmlFor="pSiren">Siren du prestataire:</label>
+                <input type="text" id="pSiren" name="siren" placeholder='SIREN' minLength={14} maxLength={14}/>
+            </div>
+            <div>
+                <label htmlFor="pSiret">Siret du prestataire:</label>
+                <input type="text" id="pSiret" name="siret" placeholder='Siret' minLength={14} maxLength={14}/>
             </div>
         </div>
     )
 }
-const Client = () => {
+const Client = () => { 
     return(
         <div className='client'>
             <div>
-                <label for="Cname">Client Name</label>
-                <input type="text" id="Cname" name="firstname" placeholder="Name"/>
+                <label htmlFor="cName">Client Name</label>
+                <input type="text" id="cName" name="firstname" placeholder="Nom " maxLength={30}/>
             </div>            
             <div>
-                <label for="Caddress"> Client Address:</label>
-                <input type="text" id="Cadresse" name="lastname" placeholder='Address'/>
+                <label htmlFor="cAddress"> Adresse du client:</label>
+                <input type="text" id="cAddress" name="lastname" placeholder='Adresse' maxLength={30}/>
             </div>                
             <div>
-                <label for="Ccomplement">Client Complément </label>
-                <input type="text" id="Ccomplement" name="complement" placeholder='Complement'/>
+                <label htmlFor="cComplement">Complement d'adresse du client </label>
+                <input type="text" id="cComplement" name="complement" placeholder="Complement d'adresse" maxLength={30}/>
             </div>
             <div>
-                <label for="Cville">Client City:</label>
-                <input type="text" id="Cville" name="ville" placeholder='City'/>
+                <label htmlFor="cCity">Ville du client:</label>
+                <input type="text" id="cCity" name="ville" placeholder='Ville' maxLength={30}/>
+            <div>
+                <label htmlFor="cPcode">Code postale du client:</label>
+                <input type="text" id="cPcode" name="ville" placeholder='Code postale' maxLength={10}/>
+            </div>
             </div>            
             <div>
-                <label for="Csiren">Client SIREN:</label>
-                <input type="text" id="Csiren" name="siren" placeholder='SIREN'/>
+                <label htmlFor="cSiren">Siren du client:</label>
+                <input type="text" id="cSiren" name="siren" placeholder='SIREN' minLength={14} maxLength={14}/>
             </div>
             <div>
-                <label for="Csiret">Client SIRET:</label>
-                <input type="text" id="Csiret" name="siret" placeholder='Siret'/>
+                <label htmlFor="cSiret">Siret du client:</label>
+                <input type="text" id="cSiret" name="siret" placeholder='Siret' minLength={14} maxLength={14}/>
             </div>
         </div>
     )
@@ -67,9 +76,11 @@ const Client = () => {
 
 
 const App = () => {
-    
-
-    var doc = new jsPDF();
+   
+    const generatePdf = (doc,e) => {
+        
+        
+        
         //---numero de facture, nom du site, date, lieu---
 
         doc.setFontSize(10)
@@ -82,12 +93,12 @@ const App = () => {
         //------- PRESTATAIRE ET CLIENT --------
 
         doc.setLineWidth(0.5)
-        doc.roundedRect(10, 20, 85, 52, 5, 5)
-        doc.roundedRect(115, 20, 85, 52, 5, 5)
+        doc.roundedRect(10, 20, 85, 55, 5, 5)
+        doc.roundedRect(115, 20, 85, 55, 5, 5)
         doc.setFontSize(14)
         doc.setFont('times','bold')
-        doc.text(33, 19, 'PRESTATAIRE')
-        doc.text(151, 19, 'CLIENT' )
+        doc.text(33, 14, 'PRESTATAIRE')
+        doc.text(146, 14, 'CLIENT' )
 
         //---------Nom,Adresse,complément,Ville,SIREN,SIRET---------
 
@@ -95,23 +106,86 @@ const App = () => {
 
         //---------PARTIE PRESTATAIRE----------
        
+        doc.setFont('times','bold')
+        doc.text(13,28,`Nom:`)
+        doc.setFont('times','normal')
+        doc.text(23,28,`${e.target.pName.value}`)
 
-        doc.text(13,30,`Name:`)
-        doc.text(13,37,`Address:`)
-        doc.text(13,44,`Complément:`)
-        doc.text(13,51,`Ville:`)
-        doc.text(13,58,`SIREN:`)
-        doc.text(13,65,`SIRET:`)
+        doc.setFont('times','bold')
+        doc.text(13,35,`Adresse:`)
+        doc.setFont('times','normal')
+        doc.text(28,35,`${e.target.pAddress.value}`)
+
+        doc.setFont('times','bold')
+        doc.text(13,42,`Complément:`)
+        doc.setFont('times','normal')
+        doc.text(37,42,`${e.target.pComplement.value}`)
+
+        doc.setFont('times','bold')
+        doc.text(13,49,`Ville:`)
+        doc.setFont('times','normal')
+        doc.text(23,49,`${e.target.pCity.value}`)
+
+        doc.setFont('times','bold')
+        doc.text(13,56,`Code postal:`)
+        doc.setFont('times','normal')
+        doc.text(37,56,`${e.target.pPcode.value}`)
+
+        doc.setFont('times','bold')
+        doc.text(13,63,`SIREN:`)
+        doc.setFont('times','normal')
+        doc.text(28,63,`${e.target.pSiren.value}`)
+
+        doc.setFont('times','bold')
+        doc.text(13,70,`SIRET:`)
+        doc.setFont('times','normal')
+        doc.text(28,70,`${e.target.pSiret.value}`)
+
+
+
 
         //---------PARTIE CLIENT---------------
+        doc.setFont('times','bold')
+        doc.text(118,28,`Nom:`)
+        doc.setFont('times','normal')
+        doc.text(128,28,`${e.target.cName.value}`)
 
-        doc.text(118,30,`Name`)
-        doc.text(118,37,`Address:`)
-        doc.text(118,44,`Complément:`)
-        doc.text(118,51,`Ville:`)
-        doc.text(118,58,`SIREN:`)
-        doc.text(118,65,`SIRET:`)
+        doc.setFont('times','bold')
+        doc.text(118,35,`Adresse:`)
+        doc.setFont('times','normal')
+        doc.text(133,35,`${e.target.cAddress.value}`)
 
+        doc.setFont('times','bold')
+        doc.text(118,42,`Complément:`)
+        doc.setFont('times','normal')
+        doc.text(142,42,`${e.target.cName.value}`)
+
+        doc.setFont('times','bold')
+        doc.text(118,49,`Ville:`)
+        doc.setFont('times','normal')
+        doc.text(128,49,`${e.target.cCity.value}`)
+
+        doc.setFont('times','bold')
+        doc.text(118,56,`Code postal:`)
+        doc.setFont('times','normal')
+        doc.text(142,56,`${e.target.cPcode.value}`)
+
+        doc.setFont('times','bold')
+        doc.text(118,63,`SIREN:`)
+        doc.setFont('times','normal')
+        doc.text(133,63,`${e.target.cSiren.value}`)
+
+        doc.setFont('times','bold')
+        doc.text(118,70,`SIRET:`)
+        doc.setFont('times','normal')
+        doc.text(133,70,`${e.target.cSiret.value}`)
+
+
+
+
+
+
+        doc.setFont('times','bold')
         //------ Designation de la prestation, Quantité, Prix Unitaire HT €, TOTAL HT €
         //------ Taleau Debut --------
         doc.rect(10,78,190,104)
@@ -130,7 +204,9 @@ const App = () => {
 
         //----Remplissage ligne par ligne-----
         doc.setFont('times','normal')
-        tabfill(doc)
+
+        var globalTotal = tabfill(doc,e)
+        
     
         //------ Date de signature, Date de reglement, Date butoire de livraison
         //------ Tableau et Date------
@@ -138,13 +214,13 @@ const App = () => {
         doc.setFont('times','bold')
         //------Date de signature------
         doc.line(10,200,105,200)
-        doc.text(15,196,'Date de signature : 22/02/2222')
+        doc.text(15,196,`Date de signature : ${e.target.Dsignature.value}`)
         //------Date de reglement------
         doc.line(10,210,105,210)
-        doc.text(15,206,'Date de reglement : 22/02/2222')
+        doc.text(15,206,`Date de reglement : ${e.target.Dsettlement.value}`)
         //------Date butoire de livraison------
         doc.line(10,220,105,220)
-        doc.text(15,216,'Date butoire de livraison : 02/02/2222')
+        doc.text(15,216,`Date butoire de livraison : ${e.target.Datelast.value}`)
 
 
         //------ TOTAL HT -----
@@ -153,7 +229,7 @@ const App = () => {
         doc.setFontSize(18)
         doc.setFont('times','bold')
         doc.text(135,200,'TOTAL HT :')
-        doc.text(135,210,'25000,00 €')
+        doc.text(135,210,`${globalTotal}€` )
         
         doc.setLineWidth(0.3)
 
@@ -167,32 +243,44 @@ const App = () => {
         doc.line(0, 290, 210, 290)
         
 
-        const download = () => {
-            doc.save('Facture.PDF')
-        }
+       
+    }
+    
+    const download = (e) => {
+        e.preventDefault()
+        var doc = new jsPDF() 
+        generatePdf(doc,e)
+        doc.save('Facture.PDF')
+    }
+
+
+   
 
   return (
     <div className="App">
         <div className='all'>
         <h3 className='center'>Facture Genrator</h3>
-        <form>
+        <form onSubmit={(e)=> download(e)}>
 
             <div className='flex'>
                 <Prestataire/>
                 <Client/>
-             </div>
+            </div>
                 <Array/>
-             
-
-
-                <label for="country">Country</label>
-                <select id="country" name="country">
-                <option value="australia">Australia</option>
-                <option value="canada">Canada</option>
-                <option value="usa">USA</option>
-                </select>
+            <div>
+                <label htmlFor="Dsignature">Date de signature :</label>
+                <input type="date" id="Dsignature" name="signature" />
+            </div>
+            <div>
+                <label htmlFor="Dsettlement">Date de reglement :</label>
+                <input type="date" id="Dsettlement" name="reglement" />
+            </div>
+            <div>
+                <label htmlFor="Datelast">Date butoire de livraison :</label>
+                <input type="date" id="Datelast" name="firstname" />
+            </div>
             
-                <input type="submit" value="Submit" onClick={download}/>
+                <input type="submit" value="Submit"/>
 
         </form>
         </div>
