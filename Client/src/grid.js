@@ -1,8 +1,8 @@
+
 const textPresent = (node) => {
     if (node.children[0].value||
-    node.children[2].value||
-    node.children[4].value||
-    node.children[6].value)
+    node.children[1].value||
+    node.children[2].value)
         return true
     return false
 }
@@ -10,18 +10,15 @@ const copyLineArray = (src,dest) => {
     var srcChildren = document.getElementById(`lineArray${src}`).children
     var destChildren = document.getElementById(`lineArray${dest}`).children
     destChildren[0].value = srcChildren[0].value
+    destChildren[1].value = srcChildren[1].value
     destChildren[2].value = srcChildren[2].value
-    destChildren[4].value = srcChildren[4].value
-    destChildren[6].value = srcChildren[6].value
 
 }
 const empty = (c) => {
     var children = document.getElementById(`lineArray${c}`).children
     children[0].value=''
+    children[1].value=''
     children[2].value=''
-    children[4].value=''
-    children[6].value=''
-
 }
 
 const loopCopy = (c) => {

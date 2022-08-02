@@ -9,10 +9,10 @@ const tabfill = (doc,e) => {
         var total = quantity * price
 
 
-        doc.text(30,Y,`${e.target.name[i].value}`)
-        doc.text(90,Y,`${isNaN(quantity) ? '' : quantity }`)
-        doc.text(125,Y,`${isNaN(price) ? '' : price}`)
-        doc.text(170,Y,`${isNaN(total) ? '' : total}`)
+        doc.text(45,Y,`${e.target.name[i].value}`,'center')
+        doc.text(92,Y,`${isNaN(quantity) ? '' : quantity }`,'center')
+        doc.text(127,Y,`${isNaN(price) ? '' : price}`,'center')
+        doc.text(175,Y,`${isNaN(total) ? '' : total}`,'center')
         globalTotal += isNaN(total) ? 0 : total
         Y=Y+10 ; i++
     }

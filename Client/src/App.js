@@ -82,12 +82,14 @@ const App = () => {
         
         
         //---numero de facture, nom du site, date, lieu---
+        var date = new Date().toLocaleDateString("fr")
 
         doc.setFontSize(10)
-        doc.text(5,5,'Facture N°: 000000')
-        doc.text(75,5,'QQCHOSE POURSITE','center')
-        doc.text(115,5,'Date : 11/06/2022')
-        doc.text(175,5,'Neuilly-sur-seine')
+        doc.text(5,5,`Facture N°: ${e.target.billN.value}`)
+        doc.text(60,5,`${e.target.billT.value}`)
+        doc.text(130,5,`${date}`)
+        doc.text(160,5,`${e.target.cCity.value}`)
+
         doc.line(0, 6, 210, 6)
 
         //------- PRESTATAIRE ET CLIENT --------
@@ -97,8 +99,8 @@ const App = () => {
         doc.roundedRect(115, 20, 85, 55, 5, 5)
         doc.setFontSize(14)
         doc.setFont('times','bold')
-        doc.text(33, 14, 'PRESTATAIRE')
-        doc.text(146, 14, 'CLIENT' )
+        doc.text(33, 16, 'PRESTATAIRE')
+        doc.text(146, 16, 'CLIENT' )
 
         //---------Nom,Adresse,complément,Ville,SIREN,SIRET---------
 
@@ -261,6 +263,16 @@ const App = () => {
         <div className='all'>
         <h3 className='center'>Facture Genrator</h3>
         <form onSubmit={(e)=> download(e)}>
+            
+            <div>
+                <label htmlFor="billN">Numero de la facture :</label>
+                <input type="text" id="billN" name="billNumber" placeholder="Facture n°:"/>
+            </div>
+            <div>
+                <label htmlFor="billT">titre de la facture :</label>
+                <input type="text" id="billT" name="billTittle" placeholder="titre :"/>
+            </div>
+            
 
             <div className='flex'>
                 <Prestataire/>
